@@ -1,0 +1,68 @@
+<mat-card class="mycard">
+  <mat-card-title>Weckzeit</mat-card-title>
+  <mat-card-content>
+<form [formGroup]="wackupTimeForm" >
+  <mat-checkbox formControlName="active" class="row">
+    Aktiv
+    <mat-error
+      class="error-message"
+      *ngIf="checkValidateError('active', 'noActiveDays')"
+      >Wähle mindestens einen Tag</mat-error
+    >
+  </mat-checkbox>
+  <mat-form-field class="row">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" placeholder="Name" />
+    <mat-error
+      class="error-message"
+      *ngIf="checkValidateError('name', 'required')"
+      >Name erforderlich</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field class="row">
+    <mat-label>Weckzeit</mat-label>
+    <input
+      matInput
+      placeholder="Weckzeit"
+      formControlName="time"
+      required
+      maxlength="5"
+    />
+    <mat-icon matSuffix>alarm</mat-icon>
+    <!-- type="time" is not working -->
+    <mat-error
+      class="error-message"
+      *ngIf="checkValidateError('time', 'required')"
+      >Zeit erforderlich</mat-error>
+    <mat-error
+      class="error-message"
+      *ngIf="checkValidateError('time', 'pattern')"
+      >Bitte Zeit im Format HH:MM angeben, also z.B. 13:42 </mat-error>
+
+  </mat-form-field>
+  <mat-checkbox formControlName="once" class="row"> Einmalig </mat-checkbox>
+  <div class="row">
+  <mat-checkbox class="col" formControlName="monday"> Montag </mat-checkbox>
+  <mat-checkbox class="col" formControlName="tuesday"> Dienstag </mat-checkbox>
+  <mat-checkbox class="col" formControlName="wednesday"> Mittwoch  </mat-checkbox>
+  <mat-checkbox class="col" formControlName="thursday"> Donnerstag </mat-checkbox>
+  <mat-checkbox class="col" formControlName="friday">  Freitag </mat-checkbox>
+  <mat-checkbox class="col" formControlName="saturday"> Samstag </mat-checkbox>
+  <mat-checkbox class="col" formControlName="sunday">  Sontag </mat-checkbox>
+  <mat-checkbox class="col" formControlName="free">   Zusätzlich auch an freien Tagen
+    <mat-error class="error-message" *ngIf="checkValidateError('free', 'free_not_free_true')">
+      Zusätzlich und "Nicht an freien Tagen" schließt sich aus
+      </mat-error>
+  </mat-checkbox>
+  <mat-checkbox class="col" formControlName="not_free">  Nicht an freien Tagen
+    <mat-error class="error-message" *ngIf="checkValidateError('free', 'free_not_free_true')">
+      Nicht.. und "Zusätzlich an freien Tagen" schließt sich aus
+      </mat-error>
+  </mat-checkbox>
+  </div>
+
+</form>
+{{ formStatus }}<mat-progress-spinner mode="indeterminate" *ngIf="isSaving()"></mat-progress-spinner>
+</mat-card-content>
+</mat-card>

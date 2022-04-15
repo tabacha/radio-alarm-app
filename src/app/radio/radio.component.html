@@ -1,0 +1,26 @@
+<mat-card class="mycard">
+    <mat-card-title>Radio</mat-card-title>
+    <mat-card-content>
+
+      <form [formGroup]="form" >
+        <mat-form-field appearance="fill" class="row">
+            <mat-label>Sender</mat-label>
+            <mat-select formControlName="station">
+               <mat-option *ngFor="let station of stations" [value]="station">
+                 {{ station }}
+               </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="row">
+            <mat-label>Lautstärke</mat-label>
+            <mat-slider formControlName="volume" min="0" max="100" step="1" value="20"></mat-slider>
+            </div>
+            <mat-checkbox formControlName="on" class="row">An</mat-checkbox>
+
+        <mat-progress-spinner mode="indeterminate" *ngIf="isSearching()"></mat-progress-spinner>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="stationSearch()">Sendesuchlauf start</button>
+    </mat-card-actions>
+</mat-card>
