@@ -1,5 +1,8 @@
-on: push
 name: Build Angular
+on:
+  create:
+    tags:
+    - 'v[0-9]+.[0-9]+.[0-9]+*'
 jobs:
   build:
     runs-on: ubuntu-latest
