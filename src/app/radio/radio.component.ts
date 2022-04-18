@@ -23,7 +23,7 @@ export class RadioComponent implements OnInit {
   searching=false
   ngOnInit(): void {
     this.service.get_sender_list().subscribe(senderData=>{
-      this.stations=Object.keys(senderData)
+      this.stations=senderData
       this.service.get_status().subscribe(status=>{
         this.form.get('station')?.setValue(status.station,{emitEvent:false})
         this.form.get('on')?.setValue(status.on,{emitEvent:false})
@@ -49,7 +49,7 @@ export class RadioComponent implements OnInit {
   stationSearch() {
     this.searching=true
     this.service.sender_search().subscribe(senderData=>{
-      this.stations=Object.keys(senderData)
+      this.stations=senderData
       this.searching=false
       if ('NDR 2 HH' in senderData) {
         this.form.get('station')?.setValue('NDR 2 HH')

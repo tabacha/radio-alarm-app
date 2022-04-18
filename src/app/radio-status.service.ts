@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { IRadioStations } from 'src/radio-stations';
 import { IRadioStatus } from 'src/radio-status';
 import { IAudioVolume } from 'src/audio-volume';
 
@@ -24,10 +23,10 @@ export class RadioStatusService {
   ) { }
 
   get_sender_list() {
-    return this.http.get<IRadioStations>(this.baseUrl + 'dab/stations/', httpOptions)
+    return this.http.get<string[]>(this.baseUrl + 'dab/stations/', httpOptions)
   }
   sender_search() {
-    return this.http.post<IRadioStations>(this.baseUrl + 'dab/stations/','', httpOptions)
+    return this.http.post<any>(this.baseUrl + 'dab/stations/','', httpOptions)
   }
   get_status() {
     return this.http.get<IRadioStatus>(this.baseUrl + 'dab/', httpOptions)
